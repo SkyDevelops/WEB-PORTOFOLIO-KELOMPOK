@@ -2,6 +2,7 @@ import { MEMBERS } from "@/lib/data";
 import { notFound } from "next/navigation";
 import CVActions from "./CVActions";
 import styles from "./cv.module.css";
+import { getAssetPath } from "@/lib/utils";
 
 // Required for static export (output: 'export') with dynamic routes
 export async function generateStaticParams() {
@@ -26,7 +27,7 @@ export default async function CVPage({ params }: { params: Promise<{ id: string 
           <div className={styles.headerLeft}>
             <div className={styles.photoBox}>
               {member.photo ? (
-                <img src={member.photo} alt={member.name} className={styles.photoImg} />
+                <img src={getAssetPath(member.photo)} alt={member.name} className={styles.photoImg} />
               ) : (
                 member.emoji
               )}

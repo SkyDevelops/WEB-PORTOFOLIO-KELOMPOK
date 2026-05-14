@@ -2,6 +2,8 @@
 
 import { type Member, SocialPlatform } from "@/types";
 import styles from "./MemberCard.module.css";
+import Link from "next/link";
+import { getAssetPath } from "@/lib/utils";
 
 /**
  * ─── MEMBER CARD COMPONENT ───────────────────────────────────────────────────
@@ -68,7 +70,7 @@ export default function MemberCard({ member }: MemberCardProps) {
           <div className={styles.cornerBr} />
           <div className={styles.photo} aria-hidden="true">
             {member.photo ? (
-              <img src={member.photo} alt={member.name} className={styles.photoImg} loading="lazy" />
+              <img src={getAssetPath(member.photo)} alt={member.name} className={styles.photoImg} loading="lazy" />
             ) : (
               member.emoji
             )}
@@ -100,9 +102,9 @@ export default function MemberCard({ member }: MemberCardProps) {
               </a>
             ))}
           </div>
-          <a href={`/cv/${member.id}`} target="_blank" rel="noopener noreferrer" className={`${styles.cvBtn} dl-cv-btn`}>
+          <Link href={`/cv/${member.id}`} target="_blank" rel="noopener noreferrer" className={`${styles.cvBtn} dl-cv-btn`}>
             ⬇ DOWNLOAD CV
-          </a>
+          </Link>
         </div>
       </div>
 
@@ -114,9 +116,9 @@ export default function MemberCard({ member }: MemberCardProps) {
             {SOCIAL_LABELS[social.platform]}
           </a>
         ))}
-        <a href={`/cv/${member.id}`} target="_blank" rel="noopener noreferrer" className={`${styles.cvBtn} dl-cv-btn`}>
+        <Link href={`/cv/${member.id}`} target="_blank" rel="noopener noreferrer" className={`${styles.cvBtn} dl-cv-btn`}>
           ⬇ DOWNLOAD CV
-        </a>
+        </Link>
       </div>
     </div>
   );
