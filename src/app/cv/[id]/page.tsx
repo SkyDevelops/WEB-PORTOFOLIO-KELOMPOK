@@ -3,6 +3,13 @@ import { notFound } from "next/navigation";
 import CVActions from "./CVActions";
 import styles from "./cv.module.css";
 
+// Required for static export (output: 'export') with dynamic routes
+export async function generateStaticParams() {
+  return MEMBERS.map((member) => ({
+    id: member.id.toString(),
+  }));
+}
+
 export default async function CVPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const member = MEMBERS.find((m) => m.id === Number(id));
