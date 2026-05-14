@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&display=swap');
+
+/* ─── DARK THEME (DEFAULT) ───────────────────────────────────────────────────── */
+:root,
+[data-theme="dark"] {
+  --cyan: #00fff5;
+  --magenta: #ff00ff;
+  --yellow: #ffff00;
+  --dark: #050a0f;
+  --dark2: #0a1520;
+  --dark3: #0f1f30;
+  --card-bg: rgba(0, 20, 40, 0.85);
+  --border-glow: rgba(0, 255, 245, 0.4);
+  --text: #c8f0ff;
+  --text-dim: #5a8fa8;
+  --font-display: 'Orbitron', monospace;
+  --font-mono: 'Share Tech Mono', monospace;
+  --font-body: 'Rajdhani', sans-serif;
+  --bg-body: #050a0f;
+  --scanline-color: rgba(0, 255, 245, 0.015);
+  --nav-bg: rgba(5, 10, 15, 0.92);
+  --grid-color: rgba(0, 255, 245, 0.04);
+  --card-border: rgba(0, 255, 245, 0.15);
+  --input-bg: rgba(0, 20, 40, 0.6);
+  --input-border: rgba(0, 255, 245, 0.2);
+}
+
+/* ─── LIGHT THEME ────────────────────────────────────────────────────────────── */
+[data-theme="light"] {
+  --cyan: #006d88;
+  --magenta: #b0008a;
+  --yellow: #886600;
+  --dark: #f0f6fa;
+  --dark2: #ddeef7;
+  --dark3: #cce0ef;
+  --card-bg: rgba(255, 255, 255, 0.88);
+  --border-glow: rgba(0, 109, 136, 0.3);
+  --text: #0a1e2e;
+  --text-dim: #3d7090;
+  --bg-body: #eaf3f9;
+  --scanline-color: rgba(0, 109, 136, 0.01);
+  --nav-bg: rgba(225, 240, 250, 0.95);
+  --grid-color: rgba(0, 109, 136, 0.06);
+  --card-border: rgba(0, 109, 136, 0.2);
+  --input-bg: rgba(255, 255, 255, 0.75);
+  --input-border: rgba(0, 109, 136, 0.25);
+}
+
+/* ─── RESET ──────────────────────────────────────────────────────────────────── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg-body);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  overflow-x: hidden;
+  cursor: none;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+@media (hover: none) and (pointer: coarse) { body { cursor: auto; } }
+@media (max-width: 640px) { body { cursor: auto; } }
+
+a { color: inherit; text-decoration: none; }
+button { border: none; background: none; cursor: pointer; }
+ul, ol { list-style: none; }
+
+/* ─── SCANLINES ──────────────────────────────────────────────────────────────── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, var(--scanline-color) 2px, var(--scanline-color) 4px);
+  pointer-events: none;
+  z-index: 998;
+}
+
+/* ─── KEYFRAMES ──────────────────────────────────────────────────────────────── */
+@keyframes gridMove { from { background-position: 0 0; } to { background-position: 50px 50px; } }
+@keyframes flicker { 0%, 95%, 100% { opacity: 1; } 96% { opacity: 0.8; } 97% { opacity: 1; } 98% { opacity: 0.7; } 99% { opacity: 1; } }
+@keyframes modalIn { from { opacity: 0; transform: scale(0.95) translateY(20px); } to { opacity: 1; transform: none; } }
+@keyframes pulse-border { 0%, 100% { border-color: rgba(0,255,245,0.25); } 50% { border-color: rgba(0,255,245,0.6); } }
+
+/* ─── SCROLL REVEAL ──────────────────────────────────────────────────────────── */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ─── RESPONSIVE GLOBAL ──────────────────────────────────────────────────────── */
+section { padding-left: clamp(1rem, 5vw, 4rem); padding-right: clamp(1rem, 5vw, 4rem); }
+
+/* ─── PRINT ──────────────────────────────────────────────────────────────────── */
+@media print {
+  body { background: white !important; color: black !important; cursor: auto; }
+  body::after { display: none; }
+}

@@ -1,0 +1,259 @@
+/* ─── CARD WRAPPER ─────────────────────────────────────────────────────────── */
+.card {
+  perspective: 1200px;
+  height: 400px;
+  cursor: none;
+}
+
+@media (hover: none), (max-width: 640px) {
+  .card { cursor: auto; height: auto; perspective: none; }
+}
+
+.inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover .inner { transform: rotateY(180deg); }
+
+@media (hover: none), (max-width: 640px) {
+  .inner { transform: none !important; height: auto; transform-style: flat; }
+}
+
+/* ─── FACE (front & back shared) ──────────────────────────────────────────── */
+.face {
+  position: absolute;
+  inset: 0;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backface-visibility: hidden;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+
+@media (hover: none), (max-width: 640px) {
+  .face {
+    position: relative;
+    backface-visibility: visible;
+    inset: auto;
+  }
+  .back { display: none; }
+}
+
+.face::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,255,245,0.06) 0%, transparent 50%, rgba(255,0,255,0.04) 100%);
+  pointer-events: none;
+}
+
+/* top-left corner accent */
+.face::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 32px; height: 32px;
+  border-top: 2px solid var(--cyan);
+  border-left: 2px solid var(--cyan);
+}
+
+/* ─── BACK FACE ────────────────────────────────────────────────────────────── */
+.back {
+  transform: rotateY(180deg);
+  justify-content: space-between;
+}
+
+/* bottom-right corner accent */
+.cornerBr {
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 32px; height: 32px;
+  border-bottom: 2px solid var(--magenta);
+  border-right: 2px solid var(--magenta);
+  pointer-events: none;
+}
+
+/* ─── FRONT: PHOTO ─────────────────────────────────────────────────────────── */
+.photo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid var(--cyan);
+  box-shadow: 0 0 16px rgba(0,255,245,0.35);
+  background: var(--dark3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin-bottom: 0.85rem;
+  flex-shrink: 0;
+  transition: border-color 0.4s ease;
+  overflow: hidden;
+}
+
+.photoImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ─── FRONT: TEXT ──────────────────────────────────────────────────────────── */
+.name {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text);
+  text-align: center;
+  margin-bottom: 0.2rem;
+  transition: color 0.4s ease;
+  line-height: 1.3;
+}
+
+.role {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--cyan);
+  letter-spacing: 1.5px;
+  margin-bottom: 0.85rem;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* ─── FRONT: SKILL BARS ────────────────────────────────────────────────────── */
+.skills {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  width: 100%;
+  margin-bottom: 0.75rem;
+}
+
+.skillRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  width: 100%;
+}
+
+.skillName {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+.skillBar {
+  height: 4px;
+  background: rgba(0, 255, 245, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.skillProgress {
+  height: 100%;
+  background: var(--cyan);
+  box-shadow: 0 0 5px var(--cyan);
+  border-radius: 2px;
+}
+
+.hint {
+  color: var(--text-dim);
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  text-align: center;
+  margin-top: auto;
+}
+
+/* ─── BACK: TITLE ──────────────────────────────────────────────────────────── */
+.backTitle {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  color: var(--cyan);
+  letter-spacing: 2px;
+  text-align: center;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid rgba(0,255,245,0.2);
+  width: 100%;
+}
+
+/* ─── BACK: SOCIAL LINKS ───────────────────────────────────────────────────── */
+.socialLinks {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.7rem;
+  background: rgba(0,255,245,0.05);
+  border: 1px solid rgba(0,255,245,0.13);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  transition: all 0.2s;
+}
+
+.socialLink:hover {
+  background: rgba(0,255,245,0.12);
+  border-color: var(--cyan);
+  color: var(--cyan);
+}
+
+.socialIcon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* ─── BACK: CV BUTTON ──────────────────────────────────────────────────────── */
+.cvBtn {
+  width: 100%;
+  padding: 0.6rem;
+  margin-top: 0.4rem;
+  background: linear-gradient(90deg, rgba(0,255,245,0.12), rgba(255,0,255,0.08));
+  border: 1px solid var(--cyan);
+  color: var(--cyan);
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+
+.cvBtn:hover {
+  background: rgba(0,255,245,0.22);
+  box-shadow: 0 0 18px rgba(0,255,245,0.28);
+}
+
+/* ─── MOBILE: SOCIALS BELOW CARD ──────────────────────────────────────────── */
+.mobileSocials {
+  display: none;
+  width: 100%;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 0.85rem 1.25rem 1.25rem;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-top: none;
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+
+@media (hover: none), (max-width: 640px) {
+  .mobileSocials { display: flex; }
+  .hint { display: none; }
+}

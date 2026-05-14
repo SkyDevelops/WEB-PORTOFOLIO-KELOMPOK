@@ -1,0 +1,17 @@
+.grid {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-color: var(--bg-body);
+  background-image:
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: gridMove 20s linear infinite;
+  transition: background-color 0.4s ease;
+}
+
+@keyframes gridMove {
+  from { background-position: 0 0; }
+  to   { background-position: 50px 50px; }
+}

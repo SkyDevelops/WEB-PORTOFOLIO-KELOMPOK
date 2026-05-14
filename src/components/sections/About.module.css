@@ -1,0 +1,76 @@
+.section {
+  position: relative;
+  z-index: 1;
+  padding: 5rem clamp(1rem, 5vw, 2rem);
+  background: linear-gradient(180deg, var(--dark) 0%, var(--dark2) 100%);
+  transition: background 0.4s ease;
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr));
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-glow);
+  padding: clamp(1.2rem, 3vw, 2rem);
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+  position: relative;
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,255,245,0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.cornerBr {
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 40px; height: 40px;
+  border-bottom: 2px solid var(--magenta);
+  border-right: 2px solid var(--magenta);
+  pointer-events: none;
+}
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: clamp(0.8rem, 2vw, 1rem);
+  color: var(--cyan);
+  margin-bottom: 1rem;
+  letter-spacing: 2px;
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid rgba(0,255,245,0.1);
+  flex-wrap: wrap;
+}
+
+.infoRow span:first-child { color: var(--text-dim); flex-shrink: 0; }
+.infoRow span:last-child { color: var(--cyan); font-family: var(--font-mono); font-size: 0.9rem; text-align: right; }
+
+.list { list-style: none; padding: 0; }
+
+.listItem { color: var(--text-dim); font-size: 1rem; line-height: 1.7; padding: 0.2rem 0; }
+.listItem::before { content: '▸ '; color: var(--cyan); }
+
+.visionText { color: var(--text-dim); font-size: 1rem; line-height: 1.7; }
+
+@media (max-width: 480px) {
+  .section { padding-top: 4rem; padding-bottom: 4rem; }
+  .infoRow { flex-direction: column; gap: 0.2rem; }
+  .infoRow span:last-child { text-align: left; }
+}

@@ -1,0 +1,88 @@
+.section {
+  position: relative;
+  z-index: 1;
+  padding: 5rem clamp(1rem, 5vw, 2rem);
+  text-align: center;
+}
+
+.wrapper {
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.item {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  padding: 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  transition: border-color 0.2s, background 0.4s ease;
+}
+
+.item:hover { border-color: var(--cyan); }
+
+.icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--cyan);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.value {
+  color: var(--text);
+  font-size: 0.95rem;
+  font-family: var(--font-mono);
+}
+
+.note {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  padding: 1.5rem 2rem;
+  position: relative;
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+
+.noteCorner {
+  position: absolute;
+  top: 0; left: 0;
+  width: 30px; height: 30px;
+  border-top: 2px solid var(--magenta);
+  border-left: 2px solid var(--magenta);
+  pointer-events: none;
+}
+
+.noteText {
+  color: var(--text-dim);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.hours {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--cyan);
+  letter-spacing: 1px;
+}
+
+@media (max-width: 480px) {
+  .section { padding-top: 4rem; padding-bottom: 4rem; }
+  .grid { grid-template-columns: 1fr; }
+}
